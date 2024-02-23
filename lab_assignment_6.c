@@ -1,7 +1,32 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int search(int numbers[], int low, int high, int value) 
 {
+	//make sure there are numbers in the array
+	if(high >= low)
+	{
+		//find midpoint
+		int mid = (low + high) / 2;
+
+		//if midpoint is our value, return its index
+		if(numbers[mid] == value)
+		{
+			return mid;
+		}
+
+		//if value at mid is greater than value
+		if(numbers[mid] > value)
+		{
+			//search the lower half of the array
+			return search(numbers, low, mid - 1, value);
+		}
+
+		//element is in larger half
+		return search(numbers, mid + 1, high, value);
+	}
+
+	//element is not present in the array
 	return -1;
 }
 
